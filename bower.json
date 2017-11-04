@@ -1,0 +1,54 @@
+{
+  "name": "px-map",
+  "version": "2.0.0",
+  "description": "A lightweight framework for building interactive maps with web components",
+  "main": [
+    "px-map.html"
+  ],
+  "ignore": [
+    "*.enc",
+    ".*",
+    "npm-debug.log",
+    "gulpfile.js",
+    "sass",
+    "bower_components",
+    "node_modules",
+    "test",
+    "OSS_Notice.pdf",
+    "scripts",
+    ".github",
+    "px-map.png",
+    "LICENSE.md",
+    "CONTRIBUTING.md",
+    "HISTORY.md",
+    "README.md",
+    ".jshintrc",
+    ".editorconfig"
+  ],
+  "dependencies": {
+    "app-localize-behavior": "^2.0.0",
+    "polymer": "^1.9.0",
+    "px-d3-imports": "^2.0.0",
+    "leaflet": "^1.0.3",
+    "leaflet.markercluster": "^1.0.3",
+    "leaflet-bing-tiles": "^1.0.0",
+    "px-icon-set": "^2.0.0"
+  },
+  "devDependencies": {
+    "px-clearfix-design": "^1.0.0",
+    "px-meta-buttons-design": "^1.0.0",
+    "px-layout-design": "^1.0.0",
+    "px-starter-kit-design": "^1.0.0",
+    "px-typography-design": "^2.0.0",
+    "iron-ajax": "^2.0.0",
+    "promise-polyfill": "polymerlabs/promise-polyfill#^2.0.1",
+    "px-code-editor": "^2.0.0",
+    "px-theme": "^3.0.0",
+    "px-demo": "^2.0.0",
+    "iron-icons": "^2.0.0"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^0.7.24",
+    "promise-polyfill": "^2.0.0"
+  }
+}
