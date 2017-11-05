@@ -1,5 +1,5 @@
 {
-    "name": "px-map-gl",
+    "name": "qa-map-gl",
     "author": "Maksim Pecherskiy",
     "description": "A lightweight framework for building interactive maps with web components",
     "version": "2.0.0",
@@ -7,9 +7,9 @@
     "extName": null,
     "repository": {
         "type": "git",
-        "url": "https://github.com/MrMaksimize/px-map-gl.git"
+        "url": "https://github.com/MrMaksimize/qa-map-gl.git"
     },
-    "homepage": "http://predix.io/",
+    "homepage": "",
     "devDependencies": {
         "babel-plugin-transform-runtime": "^6.23.0",
         "babel-preset-es2015": "^6.22.0",

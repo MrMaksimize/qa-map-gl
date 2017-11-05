@@ -1,9 +1,9 @@
 {
-  "name": "px-map-gl",
+  "name": "qa-map-gl",
   "version": "2.0.0",
   "description": "A lightweight framework for building interactive maps with web components",
   "main": [
-    "px-map-gl.html"
+    "qa-map-gl.html"
   ],
   "ignore": [
     "*.enc",
@@ -17,7 +17,7 @@
     "OSS_Notice.pdf",
     "scripts",
     ".github",
-    "px-map-gl.png",
+    "qa-map-gl.png",
     "LICENSE.md",
     "CONTRIBUTING.md",
     "HISTORY.md",
