@@ -145,6 +145,14 @@
       filter: {
         type: Array,
         observer: "shouldUpdateInst"
+      },
+
+      /**
+       * Events to bind to layer
+       */
+      events: {
+        type: String,
+        observer: "shouldUpdateInst"
       }
     },
     // Observer to catch sub-property changes on paint and layout.
@@ -191,7 +199,9 @@
     },
 
     shouldRemoveInst(parent) {
+      // In theory - this should remove all bound events to layers.
       PxMapGlBehavior.ElementImpl.shouldRemoveInst.call(this, parent);
+      // Update parent call fxn.
 
       if (this.elementInst) {
         this.removeInst(parent ? parent : undefined);
@@ -206,24 +216,21 @@
     // Methods to bind to/unbind from parent
 
     addInst(parent) {
-      console.log(this.elementInst);
       parent.elementInst.addLayer(this.elementInst);
+      var eventBindings = {};
 
       // Bind Events
       /* We're going to bind events here necessary for any layer.
        * When an event is triggered, it's going to be broadast out to the children
        * or popups.  It's also going to be broadcast up to any listeners
        */
-      this.bindEvents(
-        {
-          click: this._broadcastEvent.bind(this),
-          dblclick: this._broadcastEvent.bind(this),
-          mouseenter: this._broadcastEvent.bind(this),
-          mouseleave: this._broadcastEvent.bind(this)
-        },
-        parent.elementInst,
-        this.id
-      );
+
+      if (this.events && this.events !== "") {
+        for (let evt of this.events.split(",")) {
+          eventBindings[evt] = this._broadcastEvent.bind(this);
+        }
+        this.bindEvents(eventBindings, parent);
+      }
     },
 
     removeInst(parent) {
@@ -259,6 +266,40 @@
 
       // Set Filters
       parent.elementInst.setFilter(this.id, nextOptions.filter);
+    },
+
+    /**
+     * Bind Events
+     */
+    bindEvents(evts, parent) {
+      if (typeof evts !== "object" || !Object.keys(evts).length) return;
+
+      const mapRoot = parent.elementInst;
+      const layerId = this.id;
+
+      const boundEvts = this.__instEvents;
+      const boundEvtEls = this.__instEventsElementsMap;
+
+      for (let evtName in evts) {
+        let evtReference = { name: evtName, fn: evts[evtName] };
+        mapRoot.on(evtReference.name, layerId, evtReference.fn);
+
+        boundEvts.push(evtReference);
+        boundEvtEls.set(evtReference, mapRoot);
+      }
+    },
+
+    unbindAllEvents(boundEvts, boundEvtEls) {
+      if (!boundEvts || !boundEvts.length || !boundEvtEls) return;
+
+      for (let evt of boundEvts) {
+        let el = boundEvtEls.get(evt);
+
+        let { name, fn } = evt;
+        el.off(name, this.id, fn);
+
+        boundEvtEls.delete(evt);
+      }
     },
 
     _broadcastEvent(e) {

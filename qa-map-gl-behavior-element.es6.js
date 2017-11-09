@@ -132,12 +132,12 @@
       return this.properties;
     },
 
-    // TODO - rethink this.
-    bindEvents(evts, target, target_layer) {
+    // Bind Events
+    bindEvents(evts, target) {
       if (typeof evts !== "object" || !Object.keys(evts).length) return;
 
       const el = target || this.elementInst;
-      const layer = target_layer || undefined;
+      //const layer = target_layer || undefined;
       if (!el || !el.on) return;
 
       const boundEvts = this.__instEvents;
@@ -145,8 +145,8 @@
 
       for (let evtName in evts) {
         let evtReference = { name: evtName, fn: evts[evtName] };
-        if (layer === undefined) el.on(evtReference.name, evtReference.fn);
-        else el.on(evtReference.name, layer, evtReference.fn);
+        el.on(evtReference.name, evtReference.fn);
+        // else el.on(evtReference.name, layer, evtReference.fn);
 
         boundEvts.push(evtReference);
         boundEvtEls.set(evtReference, el);
