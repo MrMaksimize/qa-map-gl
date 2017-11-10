@@ -3,14 +3,11 @@
 <link rel="import" href="../../iron-ajax/iron-ajax.html" />
 
 <!-- Common demo imports -->
-<link rel="import" href="../../px-demo/px-demo-header.html" />
 <link rel="import" href="../../px-demo/px-demo-api-viewer.html" />
-<link rel="import" href="../../px-demo/px-demo-footer.html" />
 <link rel="import" href="../../px-demo/px-demo-configs.html" />
 <link rel="import" href="../../px-demo/px-demo-props.html" />
 <link rel="import" href="../../px-demo/px-demo-interactive.html" />
 <link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
-<link rel="import" href="../../px-demo/css/px-demo-styles.html" />
 
 <!-- Imports for this component -->
 <link rel="import" href="../qa-map-gl.html" />
@@ -27,13 +24,6 @@
 <dom-module id="qa-map-gl-geojson-demo">
   <template>
   <style include="px-demo-styles" is="custom-style"></style>
-
-  <!-- Header -->
-  <px-demo-header
-      module-name="qa-map-gl-geojson"
-      parent-name="qa-map-gl"
-      description="The qa-map-gl-geojson subcomponent draws GeoJSON data as vectors on the map.">
-  </px-demo-header>
 
   <!-- Interactive -->
   <px-demo-interactive>
@@ -102,8 +92,6 @@
     mark-private="[[apiMarkPrivate]]">
   </px-demo-api-viewer>
 
-  <!-- Footer -->
-  <px-demo-footer></px-demo-footer>
 </template>
 </dom-module>
 
