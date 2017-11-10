@@ -341,11 +341,11 @@
     },
 
     updateInst(lastOptions, nextOptions) {
-      console.log("Update Inst");
-      console.log("lastOptions");
-      console.log(lastOptions);
-      console.log("nextOptions");
-      console.log(nextOptions);
+      this.debugLog("Update Inst");
+      this.debugLog("lastOptions");
+      this.debugLog(lastOptions);
+      this.debugLog("nextOptions");
+      this.debugLog(nextOptions);
       if (
         this.latLngIsValid(nextOptions.center[0], nextOptions.center[1]) &&
         (lastOptions.center[0] !== nextOptions.center[0] ||
@@ -479,7 +479,7 @@
         this._canBeNum(lat) &&
         (typeof lng !== "undefined" && this._canBeNum(lng));
       if (isValid) return true;
-      console.log(`qa-map-gl CONFIGURATION ERROR:
+      this.debugLog(`qa-map-gl CONFIGURATION ERROR:
         You entered an invalid \`lat\` or \`lng\` attribute for ${this
           .is}. You must pass a valid number.`);
       return false;
@@ -489,7 +489,7 @@
       if (this.canAddInst()) {
         this.debounce("fire-load-events", function() {
           const ev_name = "qa-map-gl-root-" + e.type;
-          console.log("fire " + ev_name);
+          this.debugLog("fire " + ev_name);
           this.fire(ev_name, this);
         });
       }

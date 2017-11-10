@@ -1,12 +1,12 @@
 (function() {
-  'use strict';
+  "use strict";
 
   /****************************************************************************
    * BEHAVIORS
    ****************************************************************************/
 
   /* Ensures the behavior namespace is created */
-  window.PxMapGlBehavior = (window.PxMapGlBehavior || {});
+  window.PxMapGlBehavior = window.PxMapGlBehavior || {};
 
   /**
    *
@@ -30,34 +30,41 @@
       // hover
       showEvent: {
         type: String,
-        value: 'click'
+        value: "click"
       },
       popupData: {
         type: Object,
-        value: function() {
-        },
+        value: function() {},
         readOnly: true
       }
     },
     attached() {
-      console.log('attached');
       this.notifyInstReady(this.canAddInst());
-      if (this.showEvent === 'click')
-        this.listen(this.parentNode, 'qa-map-gl-layer-click', 'shouldAddInst');
-      else if (this.showEvent === 'dblclick')
-        this.listen(this.parentNode, 'qa-map-gl-layer-dblclick', 'shouldAddInst');
-      else if (this.showEvent === 'hover') {
-        this.listen(this.parentNode, 'qa-map-gl-layer-mouseenter', 'shouldAddInst');
-        this.listen(this.parentNode, 'qa-map-gl-layer-mouseleave', 'removeInst');
-      }
-      else
-        throw new Error('Invalid showEvent provided')
+      if (this.showEvent === "click")
+        this.listen(this.parentNode, "qa-map-gl-layer-click", "shouldAddInst");
+      else if (this.showEvent === "dblclick")
+        this.listen(
+          this.parentNode,
+          "qa-map-gl-layer-dblclick",
+          "shouldAddInst"
+        );
+      else if (this.showEvent === "hover") {
+        this.listen(
+          this.parentNode,
+          "qa-map-gl-layer-mouseenter",
+          "shouldAddInst"
+        );
+        this.listen(
+          this.parentNode,
+          "qa-map-gl-layer-mouseleave",
+          "removeInst"
+        );
+      } else throw new Error("Invalid showEvent provided");
     },
 
     // Say we want to programmatically trigger a popup.  The way that will be done
     // is by setting an active feature on the layer, then dispatching the event with the
     // parent to the popup.
-
 
     shouldAddInst(evt) {
       if (this.elementInst) {
@@ -66,20 +73,22 @@
       PxMapGlBehavior.ElementImpl.shouldAddInst.call(this);
       if (this.elementInst) {
         this.addInst(evt.detail);
-      };
+      }
     },
 
     addInst(eventDetail) {
       const popupData = {
         lngLat: eventDetail.event.lngLat,
         type: eventDetail.event.type,
-        features: eventDetail.event.features || [],
+        features: eventDetail.event.features || []
       };
       if (popupData.features[0].properties) {
-        popupData.activeFeatureProperties = this._toArray(popupData.features[0].properties);
+        popupData.activeFeatureProperties = this._toArray(
+          popupData.features[0].properties
+        );
       }
       this._setPopupData(popupData);
-      const node = Polymer.dom(this.root).querySelector('#popup-template');
+      const node = Polymer.dom(this.root).querySelector("#popup-template");
       this.elementInst.setLngLat(eventDetail.event.lngLat);
       this.elementInst.setDOMContent(node);
       this.elementInst.addTo(eventDetail.event.target);
@@ -108,9 +117,8 @@
       const options = {
         closeButton: !this.disableCloseButton,
         closeOnClick: !this.disableCloseOnClick
-      }
-      if (this.anchor)
-        options.anchor = this.anchor
+      };
+      if (this.anchor) options.anchor = this.anchor;
 
       return options;
     },
@@ -121,11 +129,7 @@
   };
   /* Bind Popup behavior */
   /** @polymerBehavior */
-  PxMapGlBehavior.Popup = [
-    PxMapGlBehavior.Element,
-    PxMapGlBehavior.PopupImpl
-  ];
-
+  PxMapGlBehavior.Popup = [PxMapGlBehavior.Element, PxMapGlBehavior.PopupImpl];
 
   /**
    * @polymerBehavior PxMapBehavior.InfoPopup
@@ -141,7 +145,7 @@
        */
       title: {
         type: String,
-        observer: 'shouldUpdateInst'
+        observer: "shouldUpdateInst"
       },
 
       /**
@@ -156,7 +160,7 @@
        */
       description: {
         type: String,
-        observer: 'shouldUpdateInst'
+        observer: "shouldUpdateInst"
       },
 
       /**
@@ -170,7 +174,7 @@
        */
       imgSrc: {
         type: String,
-        observer: 'shouldUpdateInst'
+        observer: "shouldUpdateInst"
       }
     },
 
@@ -196,7 +200,6 @@
         this.elementInst.updateSettings(updates);
       }
     }
-
   };
   /* Bind InfoPopup behavior */
   /** @polymerBehavior */
@@ -204,5 +207,4 @@
     PxMapGlBehavior.Popup,
     PxMapGlBehavior.InfoPopupImpl
   ];
-
 })();

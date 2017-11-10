@@ -78,7 +78,7 @@
      */
     updateInst(lastOptions, nextOptions) {
       // Run Get Options to account for empty object and inject nullIsland:
-      console.log(this.elementInst);
+      this.debugLog(this.elementInst);
       const options = this.getInstOptions();
       this.elementInst.setData(options.data);
     },
