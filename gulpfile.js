@@ -111,7 +111,7 @@ gulp.task("dist:js", ["dist:clean"], function() {
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest("./dist/"));
 
-  globby(["./px-*.es6.js"]).then(entries => {
+  globby(["./qa-*.es6.js"]).then(entries => {
     // @TODO: We have to sort this for now to make sure load order is correct.
     // This is a bad solution that we should not have to do here.
     entries = entries.reduce(
@@ -143,11 +143,11 @@ gulp.task("dist:js", ["dist:clean"], function() {
 
 gulp.task("dist:html", ["dist:clean"], function() {
   return (gulp
-      .src(["./px-*.html"])
+      .src(["./qa-*.html"])
       // Replace script links to `.es6.js` files with a link to an importer
       .pipe(
         replace(
-          /(\<script.*src\=[\'|\"])(px-.*\.es6.js)([\'|\"].*\/script\>)/g,
+          /(\<script.*src\=[\'|\"])(qa-.*\.es6.js)([\'|\"].*\/script\>)/g,
           '<link rel="import" href="qa-map-gl-bundle-loader.html" />'
         )
       )
@@ -162,7 +162,7 @@ gulp.task("dist:html", ["dist:clean"], function() {
       // Replace links to local CSS
       .pipe(
         replace(
-          /(\<link.*href=[\'|\"])(css\/)(px-.*(?=\.html|\.css))/g,
+          /(\<link.*href=[\'|\"])(css\/)(qa-.*(?=\.html|\.css))/g,
           "$1../css/$3"
         )
       )
