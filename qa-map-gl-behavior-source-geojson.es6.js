@@ -25,6 +25,8 @@
        * about the feature. Optionally, the feature's `properties.style` can be
        * set to an object that will be used to style the feature when it is drawn.
        *
+       * If a URL string is passed, it will automatically load the URL.
+       *
        * @type {Object}
        */
       data: {

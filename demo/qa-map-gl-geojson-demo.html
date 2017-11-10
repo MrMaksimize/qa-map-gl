@@ -34,7 +34,7 @@
     <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
 
     <!-- Load GeoJSON from file -->
-    <iron-ajax url="qa-map-gl-geojson-data.json" last-response="{{props.data.value}}" auto></iron-ajax>
+    <iron-ajax url="http://seshat.datasd.org/sde/fire_stations/fire_stations_datasd.geojson" last-response="{{props.data.value}}" auto></iron-ajax>
 
     <!-- Component ---------------------------------------------------------->
     <px-demo-component>
@@ -55,11 +55,33 @@
               data="{{props.data.value}}">
             </qa-map-gl-source-geojson>
 
+            <qa-map-gl-source-geojson
+              id="gjurlsource"
+              data="http://seshat.datasd.org/sde/bike_route/bike_routes_datasd.geojson">
+            </qa-map-gl-source-geojson>
+
+
+
+
             <qa-map-gl-layer
-              id="gj-symbol-layer-one"
+              id="gj-circle-layer"
               events="mouseenter,mouseleave"
               layer-type="circle"
-              source="gjsource">
+              paint='{
+              "circle-color": "blue"
+              }'
+              source="gjsource"></qa-map-gl-layer>
+
+
+            <qa-map-gl-layer
+              id="gj-line-layer"
+              events="mouseenter,mouseleave"
+              layer-type="line"
+              paint='{
+              "line-color": "pink"
+              }'
+              source="gjurlsource"></qa-map-gl-layer>
+
 
               <qa-map-gl-popup-debug
                 show-event="click"
