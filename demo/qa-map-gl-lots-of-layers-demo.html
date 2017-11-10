@@ -70,9 +70,13 @@
 
 
             <qa-map-gl-source-vector
-                id="mapbox-streets-v7"
+                id="mapbox-traffic-v1"
                 url="mapbox://mapbox.mapbox-traffic-v1">
             </qa-map-gl-source-vector>
+
+            <qa-map-gl-source-geojson
+                id="zoning"
+                data="http://seshat.datasd.org/sde/zoning/zoning_datasd.geojson"></qa-map-gl-source-geojson>
 
 
 
@@ -88,6 +92,17 @@
 
 
             <qa-map-gl-layer
+              id="zoning"
+              events="mouseenter,mouseleave"
+              layer-type="fill"
+              paint='{
+              "fill-color": "orange"
+              }'
+              source="zoning"></qa-map-gl-layer>
+
+
+
+            <qa-map-gl-layer
               id="road"
               events="mouseenter,mouseleave"
               layer-type="line"
@@ -96,6 +111,28 @@
               }'
               source-layer="road"
               source="mapbox-streets-v7"></qa-map-gl-layer>
+
+
+            <qa-map-gl-layer
+              id="traffic"
+              events="mouseenter,mouseleave"
+              layer-type="line"
+              paint='{
+                "line-width": 3,
+                "line-color": {
+                    "property": "congestion",
+                    "type": "categorical",
+                    "stops": [
+                        ["severe", "red"],
+                        ["heavy", "magenta"],
+                        ["moderate", "yellow"],
+                        ["low", "green"]
+                    ]
+                }
+              }'
+              source-layer="traffic"
+              source="mapbox-traffic-v1"></qa-map-gl-layer>
+
 
 
 
