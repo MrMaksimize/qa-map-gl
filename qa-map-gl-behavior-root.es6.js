@@ -430,7 +430,6 @@
      */
     _updateMapView() {
       if (!this.elementInst) return;
-
       this.debounce("update-map-view", function() {
         const { lng, lat } = this.elementInst.getCenter();
         const zoom = this.elementInst.getZoom();

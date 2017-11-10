@@ -25,12 +25,8 @@
       }
     },
 
-    // When this element is attached to the DOM, fire an event to notify
-    // a parent that it is ready
-
     attached() {
       this.notifyInstReady(this.canAddInst());
-      //this.listen(this, 'qa-map-gl-element-loaded', 'shouldAddInst');
       // http://sdgo.io/2vczACj
       this.listen(this.parentNode, "qa-map-gl-root-load", "shouldAddInst");
       this.listen(this.parentNode, "qa-map-gl-root-styledata", "shouldAddInst");

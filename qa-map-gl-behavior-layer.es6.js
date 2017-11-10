@@ -303,15 +303,7 @@
     },
 
     _broadcastEvent(e) {
-      // TODO make this a param?
-      const detail = {
-        // TODO - tbd if I need full node here.
-        emitter: this, // TBD - may not be neededed because.feature has layer.
-        event: e
-      };
-      const eventName = "qa-map-gl-layer-" + e.type;
-      console.log(eventName);
-      this.fire(eventName, detail);
+      this.fire(e.type);
     },
 
     _switchPointer(e) {
