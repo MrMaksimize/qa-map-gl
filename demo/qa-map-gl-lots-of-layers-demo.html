@@ -145,6 +145,7 @@
               source="composite"
               source-layer="building"
               filter='["==", "extrude", "true"]'
+              before-layer="symbol"
               paint='{
                 "fill-extrusion-color": "#aaa",
                 "fill-extrusion-height": {
@@ -155,7 +156,7 @@
                     "type": "identity",
                     "property": "min_height"
                 },
-                "fill-extrusion-opacity": 0.6
+                "fill-extrusion-opacity": 0.9
               }'>
 
                 <!--<qa-map-gl-popup-template>
