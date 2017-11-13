@@ -50,6 +50,8 @@
                 lat="{{ props.lat.value }}"
                 lng="{{ props.lng.value }}">
 
+            <qa-map-gl-control-geocoder mgl-token="{{props.mglToken.value}}"></qa-map-gl-control-geocoder>
+
             <qa-map-gl-source-geojson
               id="gjsource"
               data="{{props.data.value}}">
