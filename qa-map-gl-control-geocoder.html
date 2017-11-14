@@ -5,11 +5,10 @@
 -->
 <link rel="import" href="../polymer/polymer.html"/>
 
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.1.0/mapbox-gl-geocoder.min.js'></script>
-<link href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.1.0/mapbox-gl-geocoder.css' rel='stylesheet' />
 
 <!-- Load required PxMapGlBehaviors -->
 <link rel="import" href="qa-map-gl-behavior-control-geocoder.html">
+
 
 <!--
 ### Description
@@ -56,11 +55,12 @@ about each feature.
 @demo index.html
 -->
 
-<dom-module id="qa-map-gl-control-geocoder.html">
-  <style>
-    :host { display: none }
-  </style>
-  <template></template>
+<dom-module id="qa-map-gl-control-geocoder">
+  <template>
+    <style include="qa-map-gl-geocoder-styles">
+        :host { display: none }
+    </style>
+  </template>
 </dom-module>
 <script>
   Polymer({

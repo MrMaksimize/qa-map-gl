@@ -143,7 +143,7 @@ You can also use the qa-map-gl-tile-layer-bing component to load map tiles from 
     <!-- This should always be the last style module imported to override default styles -->
     <!--<style include="qa-map-gl-styles"></style>-->
 
-    <style>
+    <style include="qa-map-gl-mapbox-styles">
       /* By default, just fill container */
       :host {
         display: block;
@@ -155,9 +155,9 @@ You can also use the qa-map-gl-tile-layer-bing component to load map tiles from 
         height: 100%;
       }
       /** TODO -- this may be a bug **/
-      :host #map .mapboxgl-missing-css {
+      /*:host #map .mapboxgl-missing-css {
           display: none;
-      }
+      }*/
       /* Use flex to resize */
       :host([flex-to-size]) {
         display: flex;
@@ -167,6 +167,7 @@ You can also use the qa-map-gl-tile-layer-bing component to load map tiles from 
         flex: 1;
       }
     </style>
+    <style include="qa-map-gl-geocoder-styles"></style>
     <div id="map"></div>
     <content select="*"></content>
   </template>
