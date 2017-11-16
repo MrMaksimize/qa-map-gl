@@ -6,13 +6,13 @@
    ****************************************************************************/
 
   /* Ensures the behavior namespace is created */
-  window.PxMapGlBehavior = window.PxMapGlBehavior || {};
+  window.QaMapGlBehavior = window.QaMapGlBehavior || {};
 
   /**
    *
-   * @polymerBehavior PxMapGlBehavior.Element
+   * @polymerBehavior QaMapGlBehavior.Element
    */
-  PxMapGlBehavior.ElementImpl = {
+  QaMapGlBehavior.ElementImpl = {
     properties: {
       /**
        * Turn debugging and console logs on or off
@@ -203,5 +203,5 @@
     }
   };
   /* Bind Element behavior */
-  PxMapGlBehavior.Element = [PxMapGlBehavior.ElementImpl];
+  QaMapGlBehavior.Element = [QaMapGlBehavior.ElementImpl];
 })();

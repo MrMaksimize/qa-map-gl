@@ -6,12 +6,12 @@
    ****************************************************************************/
 
   /* Ensures the behavior namespace is created */
-  window.PxMapGlBehavior = window.PxMapGlBehavior || {};
+  window.QaMapGlBehavior = window.QaMapGlBehavior || {};
 
   /**
-   * @polymerBehavior PxMapGlBehavior.Control
+   * @polymerBehavior QaMapGlBehavior.Control
    */
-  PxMapGlBehavior.ControlImpl = {
+  QaMapGlBehavior.ControlImpl = {
     properties: {
       /**
        * position on the map to which the control will be added.
@@ -40,7 +40,7 @@
     // instance to its parent
     shouldAddInst(evt) {
       const parent = evt.detail;
-      PxMapGlBehavior.ElementImpl.shouldAddInst.call(this, parent);
+      QaMapGlBehavior.ElementImpl.shouldAddInst.call(this, parent);
 
       if (this.elementInst && parent) {
         this.addInst(parent);
@@ -48,7 +48,7 @@
     },
 
     shouldRemoveInst(parent) {
-      PxMapGlBehavior.ElementImpl.shouldRemoveInst.call(this, parent);
+      QaMapGlBehavior.ElementImpl.shouldRemoveInst.call(this, parent);
 
       if (this.elementInst) {
         this.removeInst(parent ? parent : undefined);
@@ -86,15 +86,15 @@
   };
   /* Bind Layer behavior */
   /** @polymerBehavior */
-  PxMapGlBehavior.Control = [
-    PxMapGlBehavior.Element,
-    PxMapGlBehavior.ControlImpl
+  QaMapGlBehavior.Control = [
+    QaMapGlBehavior.Element,
+    QaMapGlBehavior.ControlImpl
   ];
 
   /**
-   * @polymerBehavior PxMapGlBehavior.NavControl
+   * @polymerBehavior QaMapGlBehavior.NavControl
    */
-  PxMapGlBehavior.NavControlImpl = {
+  QaMapGlBehavior.NavControlImpl = {
     createInst(options) {
       return new mapboxgl.NavigationControl();
     },
@@ -105,15 +105,15 @@
     }
   };
 
-  PxMapGlBehavior.NavControl = [
-    PxMapGlBehavior.Control,
-    PxMapGlBehavior.NavControlImpl
+  QaMapGlBehavior.NavControl = [
+    QaMapGlBehavior.Control,
+    QaMapGlBehavior.NavControlImpl
   ];
 
   /**
-   * @polymerBehavior PxMapGlBehavior.FullScreenControl
+   * @polymerBehavior QaMapGlBehavior.FullScreenControl
    */
-  PxMapGlBehavior.FullScreenControlImpl = {
+  QaMapGlBehavior.FullScreenControlImpl = {
     createInst(options) {
       return new mapboxgl.FullscreenControl();
     },
@@ -124,15 +124,15 @@
     }
   };
 
-  PxMapGlBehavior.FullScreenControl = [
-    PxMapGlBehavior.Control,
-    PxMapGlBehavior.FullScreenControlImpl
+  QaMapGlBehavior.FullScreenControl = [
+    QaMapGlBehavior.Control,
+    QaMapGlBehavior.FullScreenControlImpl
   ];
 
   /**
-   * @polymerBehavior PxMapGlBehavior.GeolocateControl
+   * @polymerBehavior QaMapGlBehavior.GeolocateControl
    */
-  PxMapGlBehavior.GeolocateControlImpl = {
+  QaMapGlBehavior.GeolocateControlImpl = {
     properties: {
       /**
        * Is a Boolean that indicates the application would like to receive the best
@@ -206,15 +206,15 @@
     }
   };
 
-  PxMapGlBehavior.GeolocateControl = [
-    PxMapGlBehavior.Control,
-    PxMapGlBehavior.GeolocateControlImpl
+  QaMapGlBehavior.GeolocateControl = [
+    QaMapGlBehavior.Control,
+    QaMapGlBehavior.GeolocateControlImpl
   ];
 
   /**
-   * @polymerBehavior PxMapGlBehavior.ScaleControl
+   * @polymerBehavior QaMapGlBehavior.ScaleControl
    */
-  PxMapGlBehavior.ScaleControlImpl = {
+  QaMapGlBehavior.ScaleControlImpl = {
     properties: {
       /**
        * The maximum length of the scale control in pixels.
@@ -248,15 +248,15 @@
     }
   };
 
-  PxMapGlBehavior.ScaleControl = [
-    PxMapGlBehavior.Control,
-    PxMapGlBehavior.ScaleControlImpl
+  QaMapGlBehavior.ScaleControl = [
+    QaMapGlBehavior.Control,
+    QaMapGlBehavior.ScaleControlImpl
   ];
 
   /**
-   * @polymerBehavior PxMapGlBehavior.AttributionControl
+   * @polymerBehavior QaMapGlBehavior.AttributionControl
    */
-  PxMapGlBehavior.AttributionControlImpl = {
+  QaMapGlBehavior.AttributionControlImpl = {
     properties: {
       /**
        * If  true force a compact attribution that shows the full attribution on
@@ -282,8 +282,8 @@
     }
   };
 
-  PxMapGlBehavior.AttributionControl = [
-    PxMapGlBehavior.Control,
-    PxMapGlBehavior.AttributionControlImpl
+  QaMapGlBehavior.AttributionControl = [
+    QaMapGlBehavior.Control,
+    QaMapGlBehavior.AttributionControlImpl
   ];
 })();

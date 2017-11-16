@@ -6,14 +6,14 @@
      ****************************************************************************/
 
     /* Ensures the behavior namespace is created */
-    window.PxMapGlBehavior = window.PxMapGlBehavior || {};
+    window.QaMapGlBehavior = window.QaMapGlBehavior || {};
 
     /**
      *
      *
-     * @polymerBehavior PxMapGlBehavior.Layer
+     * @polymerBehavior QaMapGlBehavior.Layer
      */
-    PxMapGlBehavior.LayerImpl = {
+    QaMapGlBehavior.LayerImpl = {
         // When this element is attached to the DOM, fire an event to notify
         // a parent that it is ready
 
@@ -186,7 +186,7 @@
             this.debounce(
                 "shouldUpdateInstDebounce",
                 function() {
-                    PxMapGlBehavior.ElementImpl.shouldUpdateInst.call(this, parent);
+                    QaMapGlBehavior.ElementImpl.shouldUpdateInst.call(this, parent);
                 },
                 250
             );
@@ -195,7 +195,7 @@
         shouldAddInst(evt) {
             // TODO - do we need this evt anymore since _getMapElement would just work?
             const parent = evt.detail;
-            PxMapGlBehavior.ElementImpl.shouldAddInst.call(this, parent);
+            QaMapGlBehavior.ElementImpl.shouldAddInst.call(this, parent);
 
             if (
                 this.elementInst &&
@@ -208,7 +208,7 @@
 
         shouldRemoveInst(parent) {
             // In theory - this should remove all bound events to layers.
-            PxMapGlBehavior.ElementImpl.shouldRemoveInst.call(this, parent);
+            QaMapGlBehavior.ElementImpl.shouldRemoveInst.call(this, parent);
             // Update parent call fxn.
 
             if (this.elementInst) {
@@ -383,5 +383,5 @@
     };
     /* Bind Layer behavior */
     /** @polymerBehavior */
-    PxMapGlBehavior.Layer = [PxMapGlBehavior.Element, PxMapGlBehavior.LayerImpl];
+    QaMapGlBehavior.Layer = [QaMapGlBehavior.Element, QaMapGlBehavior.LayerImpl];
 })();

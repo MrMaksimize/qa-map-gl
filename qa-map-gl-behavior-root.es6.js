@@ -6,13 +6,13 @@
    ****************************************************************************/
 
   /* Ensures the behavior namespace is created */
-  window.PxMapGlBehavior = window.PxMapGlBehavior || {};
+  window.QaMapGlBehavior = window.QaMapGlBehavior || {};
 
   /**
    *
-   * @polymerBehavior PxMapGlBehavior.MglRoot
+   * @polymerBehavior QaMapGlBehavior.MglRoot
    */
-  PxMapGlBehavior.MglRootImpl = {
+  QaMapGlBehavior.MglRootImpl = {
     properties: {
       /**
        * Style
@@ -260,7 +260,7 @@
     shouldAddInst(evt) {
       if (Polymer.dom(evt).rootTarget !== this) return;
 
-      PxMapGlBehavior.ElementImpl.shouldAddInst.call(this);
+      QaMapGlBehavior.ElementImpl.shouldAddInst.call(this);
       this.addInst();
     },
 
@@ -564,8 +564,8 @@
   };
   /* Bind Popup behavior */
   /** @polymerBehavior */
-  PxMapGlBehavior.MglRoot = [
-    PxMapGlBehavior.Element,
-    PxMapGlBehavior.MglRootImpl
+  QaMapGlBehavior.MglRoot = [
+    QaMapGlBehavior.Element,
+    QaMapGlBehavior.MglRootImpl
   ];
 })();

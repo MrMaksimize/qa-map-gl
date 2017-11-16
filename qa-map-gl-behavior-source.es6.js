@@ -6,14 +6,14 @@
    ****************************************************************************/
 
   /* Ensures the behavior namespace is created */
-  window.PxMapGlBehavior = window.PxMapGlBehavior || {};
+  window.QaMapGlBehavior = window.QaMapGlBehavior || {};
 
   /**
    *
    *
-   * @polymerBehavior PxMapGlBehavior.Layer
+   * @polymerBehavior QaMapGlBehavior.Layer
    */
-  PxMapGlBehavior.SourceImpl = {
+  QaMapGlBehavior.SourceImpl = {
     properties: {
       /**
        * Unique id of this source.
@@ -44,7 +44,7 @@
 
     shouldAddInst(evt) {
       const parent = evt.detail;
-      PxMapGlBehavior.ElementImpl.shouldAddInst.call(this, parent);
+      QaMapGlBehavior.ElementImpl.shouldAddInst.call(this, parent);
 
       if (
         this.elementInst &&
@@ -56,7 +56,7 @@
     },
 
     shouldRemoveInst(parent) {
-      PxMapGlBehavior.ElementImpl.shouldRemoveInst.call(this, parent);
+      QaMapGlBehavior.ElementImpl.shouldRemoveInst.call(this, parent);
 
       if (this.elementInst) {
         this.removeInst(parent ? parent : undefined);
@@ -112,9 +112,9 @@
   };
   /* Bind Layer behavior */
   /** @polymerBehavior */
-  PxMapGlBehavior.Source = [
-    PxMapGlBehavior.Element,
-    PxMapGlBehavior.SourceImpl
+  QaMapGlBehavior.Source = [
+    QaMapGlBehavior.Element,
+    QaMapGlBehavior.SourceImpl
   ];
 
   // if bring parentlayerimpl stuff back, pull from layer.

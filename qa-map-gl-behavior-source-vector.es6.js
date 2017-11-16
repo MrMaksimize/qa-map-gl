@@ -6,13 +6,13 @@
    ****************************************************************************/
 
   /* Ensures the behavior namespace is created */
-  window.PxMapGlBehavior = window.PxMapGlBehavior || {};
+  window.QaMapGlBehavior = window.QaMapGlBehavior || {};
 
   /**
    *
-   * @polymerBehavior PxMapGlBehavior.GeoJSONLayer
+   * @polymerBehavior QaMapGlBehavior.GeoJSONLayer
    */
-  PxMapGlBehavior.VectorSourceImpl = {
+  QaMapGlBehavior.VectorSourceImpl = {
     properties: {
       /**
        * A URL to a TileJSON resource.
@@ -38,7 +38,7 @@
 
     // extends the layer `addInst` method to harvest and fire events
     addInst(parent) {
-      PxMapGlBehavior.SourceImpl.addInst.call(this, parent);
+      QaMapGlBehavior.SourceImpl.addInst.call(this, parent);
     },
 
     createInst(options) {
@@ -63,7 +63,7 @@
     },
 
     getInstOptions() {
-      const options = PxMapGlBehavior.SourceImpl.getInstOptions.call(this);
+      const options = QaMapGlBehavior.SourceImpl.getInstOptions.call(this);
       options.url = this.url;
       options.tiles = this.tiles;
       options.type = "vector";
@@ -72,8 +72,8 @@
   };
   /* Bind GeoJSONSource behavior */
   /** @polymerBehavior */
-  PxMapGlBehavior.VectorSource = [
-    PxMapGlBehavior.Source,
-    PxMapGlBehavior.VectorSourceImpl
+  QaMapGlBehavior.VectorSource = [
+    QaMapGlBehavior.Source,
+    QaMapGlBehavior.VectorSourceImpl
   ];
 })();

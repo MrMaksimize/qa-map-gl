@@ -6,12 +6,12 @@
    ****************************************************************************/
 
   /* Ensures the behavior namespace is created */
-  window.PxMapGlBehavior = window.PxMapGlBehavior || {};
+  window.QaMapGlBehavior = window.QaMapGlBehavior || {};
 
   /**
-   * @polymerBehavior PxMapGlBehavior.GeocoderControl
+   * @polymerBehavior QaMapGlBehavior.GeocoderControl
    */
-  PxMapGlBehavior.GeocoderControlImpl = {
+  QaMapGlBehavior.GeocoderControlImpl = {
     properties: {
       /**
        * Set the mapbox-gl token.
@@ -39,8 +39,8 @@
     }
   };
 
-  PxMapGlBehavior.GeocoderControl = [
-    PxMapGlBehavior.Control,
-    PxMapGlBehavior.GeocoderControlImpl
+  QaMapGlBehavior.GeocoderControl = [
+    QaMapGlBehavior.Control,
+    QaMapGlBehavior.GeocoderControlImpl
   ];
 })();

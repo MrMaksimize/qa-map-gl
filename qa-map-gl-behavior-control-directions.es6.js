@@ -6,12 +6,12 @@
    ****************************************************************************/
 
   /* Ensures the behavior namespace is created */
-  window.PxMapGlBehavior = window.PxMapGlBehavior || {};
+  window.QaMapGlBehavior = window.QaMapGlBehavior || {};
 
   /**
-   * @polymerBehavior PxMapGlBehavior.DirectionsControl
+   * @polymerBehavior QaMapGlBehavior.DirectionsControl
    */
-  PxMapGlBehavior.DirectionsControlImpl = {
+  QaMapGlBehavior.DirectionsControlImpl = {
     // TODO - properties.
     properties: {
       /**
@@ -40,8 +40,8 @@
     }
   };
 
-  PxMapGlBehavior.DirectionsControl = [
-    PxMapGlBehavior.Control,
-    PxMapGlBehavior.DirectionsControlImpl
+  QaMapGlBehavior.DirectionsControl = [
+    QaMapGlBehavior.Control,
+    QaMapGlBehavior.DirectionsControlImpl
   ];
 })();

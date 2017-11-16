@@ -6,13 +6,13 @@
    ****************************************************************************/
 
   /* Ensures the behavior namespace is created */
-  window.PxMapGlBehavior = window.PxMapGlBehavior || {};
+  window.QaMapGlBehavior = window.QaMapGlBehavior || {};
 
   /**
    *
-   * @polymerBehavior PxMapGlBehavior.GeoJSONSource
+   * @polymerBehavior QaMapGlBehavior.GeoJSONSource
    */
-  PxMapGlBehavior.GeoJSONSourceImpl = {
+  QaMapGlBehavior.GeoJSONSourceImpl = {
     properties: {
       /**
        * An object formatted as a GeoJSON FeatureCollection with one or many Features.
@@ -60,7 +60,7 @@
 
     // extends the layer `addInst` method to harvest and fire events
     addInst(parent) {
-      PxMapGlBehavior.SourceImpl.addInst.call(this, parent);
+      QaMapGlBehavior.SourceImpl.addInst.call(this, parent);
     },
 
     createInst(options) {
@@ -101,7 +101,7 @@
       };
       if (this.data && this.data !== {}) srcData = this.data;
 
-      const options = PxMapGlBehavior.SourceImpl.getInstOptions.call(this);
+      const options = QaMapGlBehavior.SourceImpl.getInstOptions.call(this);
       options.data = srcData;
       options.type = "geojson";
       return options;
@@ -110,8 +110,8 @@
 
   /* Bind GeoJSONSource behavior */
   /** @polymerBehavior */
-  PxMapGlBehavior.GeoJSONSource = [
-    PxMapGlBehavior.Source,
-    PxMapGlBehavior.GeoJSONSourceImpl
+  QaMapGlBehavior.GeoJSONSource = [
+    QaMapGlBehavior.Source,
+    QaMapGlBehavior.GeoJSONSourceImpl
   ];
 })();

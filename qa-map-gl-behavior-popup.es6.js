@@ -6,13 +6,13 @@
    ****************************************************************************/
 
   /* Ensures the behavior namespace is created */
-  window.PxMapGlBehavior = window.PxMapGlBehavior || {};
+  window.QaMapGlBehavior = window.QaMapGlBehavior || {};
 
   /**
    *
-   * @polymerBehavior PxMapBehavior.Popup
+   * @polymerBehavior QaMapGlBehavior.Popup
    */
-  PxMapGlBehavior.PopupImpl = {
+  QaMapGlBehavior.PopupImpl = {
     properties: {
       disableCloseButton: {
         type: String,
@@ -70,7 +70,7 @@
       if (this.elementInst) {
         this.removeInst();
       }
-      PxMapGlBehavior.ElementImpl.shouldAddInst.call(this);
+      QaMapGlBehavior.ElementImpl.shouldAddInst.call(this);
       if (this.elementInst) {
         this.addInst(evt.detail);
       }
@@ -129,12 +129,12 @@
   };
   /* Bind Popup behavior */
   /** @polymerBehavior */
-  PxMapGlBehavior.Popup = [PxMapGlBehavior.Element, PxMapGlBehavior.PopupImpl];
+  QaMapGlBehavior.Popup = [QaMapGlBehavior.Element, QaMapGlBehavior.PopupImpl];
 
   /**
-   * @polymerBehavior PxMapBehavior.InfoPopup
+   * @polymerBehavior QaMapGlBehavior.InfoPopup
    */
-  PxMapGlBehavior.InfoPopupImpl = {
+  QaMapGlBehavior.InfoPopupImpl = {
     properties: {
       /**
        * Title text to display in bold at the top of the popup. Should be kept
@@ -203,8 +203,8 @@
   };
   /* Bind InfoPopup behavior */
   /** @polymerBehavior */
-  PxMapGlBehavior.InfoPopup = [
-    PxMapGlBehavior.Popup,
-    PxMapGlBehavior.InfoPopupImpl
+  QaMapGlBehavior.InfoPopup = [
+    QaMapGlBehavior.Popup,
+    QaMapGlBehavior.InfoPopupImpl
   ];
 })();
