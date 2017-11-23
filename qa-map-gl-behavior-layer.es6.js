@@ -329,6 +329,8 @@
         },
 
         _broadcastEvent(e) {
+            console.log('broadcasting event from layer' + this.id);
+            console.log(e);
             this.fire(e.type);
         },
 
