@@ -1,207 +1,214 @@
 (function() {
-  "use strict";
+    "use strict";
 
-  /****************************************************************************
-   * BEHAVIORS
-   ****************************************************************************/
+    /****************************************************************************
+     * BEHAVIORS
+     ****************************************************************************/
 
-  /* Ensures the behavior namespace is created */
-  window.QaMapGlBehavior = window.QaMapGlBehavior || {};
-
-  /**
-   *
-   * @polymerBehavior QaMapGlBehavior.Element
-   */
-  QaMapGlBehavior.ElementImpl = {
-    properties: {
-      /**
-       * Turn debugging and console logs on or off
-       */
-      debug: {
-        type: Boolean,
-        value: false
-      }
-    },
-    beforeRegister() {
-      /**
-       * A reference to this element's instance. The instance can be configured and
-       * attached to the map or to another instance. Events emitted by this instance
-       * will be intercepted and retargeted so they appear to come from directly from
-       * this custom element.
-       *
-       * @property elementInst
-       * @type {Object|null}
-       */
-      this.elementInst = null;
-    },
-
-    attached() {
-      this.__elAttached = true;
-    },
-
-    detached() {
-      this.__elAttached = false;
-    },
+    /* Ensures the behavior namespace is created */
+    window.QaMapGlBehavior = window.QaMapGlBehavior || {};
 
     /**
-     * If this element's instance is ready to create and add to its parent,
-     * fires an event the parent will catch.
      *
-     * @param {Boolean} isReady - If `true` instance parent will be notified
-     * @return {Boolean} - If `true` the parent was notified
+     * @polymerBehavior QaMapGlBehavior.Element
      */
-    notifyInstReady(isReady = true) {
-      if (!isReady) return false;
-      this.fire("qa-map-gl-gl-element-ready-to-add");
-      return true;
-    },
+    QaMapGlBehavior.ElementImpl = {
+        properties: {
+            /**
+             * Turn debugging and console logs on or off
+             */
+            debug: {
+                type: Boolean,
+                value: false
+            }
+        },
+        beforeRegister() {
+            /**
+             * A reference to this element's instance. The instance can be configured and
+             * attached to the map or to another instance. Events emitted by this instance
+             * will be intercepted and retargeted so they appear to come from directly from
+             * this custom element.
+             *
+             * @property elementInst
+             * @type {Object|null}
+             */
+            this.elementInst = null;
+        },
 
-    shouldAddInst() {
-      // Create the instance, if it doesn't already exist
-      if (!this.elementInst) {
-        const options = (this.__initialOptions = this.getInstOptions());
-        this.elementInst = this.createInst(options);
-        this.fire("qa-map-gl-element-instance-created");
-      }
+        attached() {
+            this.__elAttached = true;
+        },
 
-      this.__instEvents = this.__instEvents || [];
-      this.__instEventsElementsMap =
-        this.__instEventsElementsMap || new WeakMap();
-    },
+        detached() {
+            this.__elAttached = false;
+        },
 
-    shouldRemoveInst() {
-      this.unbindAllEvents(this.__instEvents, this.__instEventsElementsMap);
-      this.__instEvents = null;
-      this.__instEventsElementsMap = null;
-    },
+        /**
+         * If this element's instance is ready to create and add to its parent,
+         * fires an event the parent will catch.
+         *
+         * @param {Boolean} isReady - If `true` instance parent will be notified
+         * @return {Boolean} - If `true` the parent was notified
+         */
+        notifyInstReady(isReady = true) {
+            if (!isReady) return false;
+            this.fire("qa-map-gl-element-ready-to-add");
+            return true;
+        },
 
-    // Simple observer trigger for dynamic properties that should be synced
-    // to the instance
-    shouldUpdateInst() {
-      if (!this.elementInst && this.__elAttached && this.canAddInst()) {
-        this.notifyInstReady(this.canAddInst());
-      }
-      if (!this.elementInst) return;
+        shouldAddInst() {
+            // Create the instance, if it doesn't already exist
+            if (!this.elementInst) {
+                const options = (this.__initialOptions = this.getInstOptions());
+                this.elementInst = this.createInst(options);
+                this.fire("qa-map-gl-element-instance-created");
+            }
 
-      const lastOptions = this.__lastOptions || this.__initialOptions;
-      const nextOptions = this.getInstOptions();
+            this.__instEvents = this.__instEvents || [];
+            this.__instEventsElementsMap =
+                this.__instEventsElementsMap || new WeakMap();
+        },
 
-      // Only root element doesn't pass parent
-      if (this.is !== "qa-map-gl") {
-        this.updateInst(lastOptions, nextOptions, this.parentNode);
-      } else {
-        this.updateInst(lastOptions, nextOptions);
-      }
+        shouldRemoveInst() {
+            this.unbindAllEvents(this.__instEvents, this.__instEventsElementsMap);
+            this.__instEvents = null;
+            this.__instEventsElementsMap = null;
+        },
 
-      // Set `lastOptions` to `nextOptions` so the next time this method is called
-      // it will have access to the last options
-      this.__lastOptions = nextOptions;
-    },
+        // Simple observer trigger for dynamic properties that should be synced
+        // to the instance
+        shouldUpdateInst() {
+            if (!this.elementInst && this.__elAttached && this.canAddInst()) {
+                this.notifyInstReady(this.canAddInst());
+            }
+            if (!this.elementInst) return;
 
-    // Should be implemented by behaviors/components that extend...
+            const lastOptions = this.__lastOptions || this.__initialOptions;
+            const nextOptions = this.getInstOptions();
 
-    createInst() {
-      throw new Error("The `createInst` method must be implemented.");
-    },
+            // Only root element doesn't pass parent
+            if (this.is !== "qa-map-gl") {
+                this.updateInst(lastOptions, nextOptions, this.parentNode);
+            } else {
+                this.updateInst(lastOptions, nextOptions);
+            }
 
-    updateInst() {
-      throw new Error("The `updateInst` method must be implemented.");
-    },
+            // Set `lastOptions` to `nextOptions` so the next time this method is called
+            // it will have access to the last options
+            this.__lastOptions = nextOptions;
+        },
 
-    getInstOptions() {
-      throw new Error("The `getInstOptions` method must be implemented.");
-    },
+        // Should be implemented by behaviors/components that extend...
 
-    addInst() {
-      throw new Error("The `bindInst` method must be implemented.");
-    },
+        createInst() {
+            throw new Error("The `createInst` method must be implemented.");
+        },
 
-    removeInst() {
-      throw new Error("The `unbindInst` method must be implemented.");
-    },
+        updateInst() {
+            throw new Error("The `updateInst` method must be implemented.");
+        },
 
-    // Helper methods
+        getInstOptions() {
+            throw new Error("The `getInstOptions` method must be implemented.");
+        },
 
-    extendObj(obj, ...properties) {
-      if (!obj || !(obj instanceof Object))
-        throw new Error(
-          "The first parameter of `extendObj` must be an object to be mutated."
-        );
-      if (properties.length) {
-        Object.assign(obj, ...properties);
-      }
-      return obj;
-    },
+        addInst() {
+            throw new Error("The `bindInst` method must be implemented.");
+        },
 
-    addProperties(...properties) {
-      this.properties = this.properties || {};
-      if (properties.length) {
-        this.extend(this.properties, ...properties);
-      }
-      return this.properties;
-    },
+        removeInst() {
+            throw new Error("The `unbindInst` method must be implemented.");
+        },
 
-    // Bind Events
-    bindEvents(evts, target) {
-      if (typeof evts !== "object" || !Object.keys(evts).length) return;
+        // Helper methods
 
-      const el = target || this.elementInst;
-      if (!el || !el.on) return;
+        extendObj(obj, ...properties) {
+            if (!obj || !(obj instanceof Object))
+                throw new Error(
+                    "The first parameter of `extendObj` must be an object to be mutated."
+                );
+            if (properties.length) {
+                Object.assign(obj, ...properties);
+            }
+            return obj;
+        },
 
-      const boundEvts = this.__instEvents;
-      const boundEvtEls = this.__instEventsElementsMap;
+        addProperties(...properties) {
+            this.properties = this.properties || {};
+            if (properties.length) {
+                this.extend(this.properties, ...properties);
+            }
+            return this.properties;
+        },
 
-      for (let evtName in evts) {
-        let evtReference = { name: evtName, fn: evts[evtName] };
-        el.on(evtReference.name, evtReference.fn);
+        // Bind Events
+        bindEvents(evts, target) {
+            if (typeof evts !== "object" || !Object.keys(evts).length) return;
 
-        boundEvts.push(evtReference);
-        boundEvtEls.set(evtReference, el);
-      }
-    },
+            const el = target || this.elementInst;
+            if (!el || !el.on) return;
 
-    unbindAllEvents(boundEvts, boundEvtEls) {
-      // Unbinding not really needed for layer objects.
-      if (!boundEvts || !boundEvts.length || !boundEvtEls) return;
+            const boundEvts = this.__instEvents;
+            const boundEvtEls = this.__instEventsElementsMap;
 
-      for (let evt of boundEvts) {
-        let el = boundEvtEls.get(evt);
-        if (!el || !el.off) continue;
+            for (let evtName in evts) {
+                let evtReference = {
+                    name: evtName,
+                    fn: evts[evtName]
+                };
+                el.on(evtReference.name, evtReference.fn);
 
-        let { name, fn } = evt;
-        el.off(name, fn);
+                boundEvts.push(evtReference);
+                boundEvtEls.set(evtReference, el);
+            }
+        },
 
-        boundEvtEls.delete(evt);
-      }
-    },
+        unbindAllEvents(boundEvts, boundEvtEls) {
+            // Unbinding not really needed for layer objects.
+            if (!boundEvts || !boundEvts.length || !boundEvtEls) return;
 
-    debugLog(message) {
-      if (this.debug === true) console.log(message);
-    },
+            for (let evt of boundEvts) {
+                let el = boundEvtEls.get(evt);
+                if (!el || !el.off) continue;
 
-    /**
-     * If this component is being drawn in Shady DOM, returns true. Used to
-     * ensure the shady DOM scope classes are applied when we make DOM
-     * transactions that can't be reviewed by the scopeSubtree observer
-     * in the root `qa-map-gl-gl` component that is the parent of all elements.
-     *
-     * @return {Boolean}
-     */
-    isShadyScoped() {
-      return !Polymer.Settings.useNativeShadow;
-    },
+                let {
+                    name,
+                    fn
+                } = evt;
+                el.off(name, fn);
 
-    /**
-     * Returns the stringified shady DOM scope classes. Useful for ensuring they're
-     * applied during DOM transactions that can't be reviewed by the scopeSubtree
-     * observer in the root `qa-map-gl-gl` component that is the parent of all elements.
-     *
-     * @return {String} A list of CSS classes separated by spaces
-     */
-    getShadyScope() {
-      return "style-scope qa-map-gl-gl";
-    }
-  };
-  /* Bind Element behavior */
-  QaMapGlBehavior.Element = [QaMapGlBehavior.ElementImpl];
+                boundEvtEls.delete(evt);
+            }
+        },
+
+        debugLog(message) {
+            if (this.debug === true) console.log(message);
+        },
+
+        /**
+         * If this component is being drawn in Shady DOM, returns true. Used to
+         * ensure the shady DOM scope classes are applied when we make DOM
+         * transactions that can't be reviewed by the scopeSubtree observer
+         * in the root `qa-map-gl` component that is the parent of all elements.
+         *
+         * @return {Boolean}
+         */
+        isShadyScoped() {
+            console.log(Polymer.settings)
+            return !Polymer.Settings.useNativeShadow;
+        },
+
+        /**
+         * Returns the stringified shady DOM scope classes. Useful for ensuring they're
+         * applied during DOM transactions that can't be reviewed by the scopeSubtree
+         * observer in the root `qa-map-gl` component that is the parent of all elements.
+         *
+         * @return {String} A list of CSS classes separated by spaces
+         */
+        getShadyScope() {
+            return "style-scope qa-map-gl";
+        }
+    };
+    /* Bind Element behavior */
+    QaMapGlBehavior.Element = [QaMapGlBehavior.ElementImpl];
 })();
