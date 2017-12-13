@@ -70,8 +70,10 @@
              * @type {Array}
              */
             bbox: {
-                type: String,
-                value: null
+                type: Array,
+                value: function() {
+                    return null;
+                }
             },
             /**
              * A comma separated list of
@@ -127,7 +129,7 @@
             lastResults: {
                 type: Object,
                 readOnly: true,
-                notify: true
+                notify: true,
                 value: function() {
                     return null;
                 }
