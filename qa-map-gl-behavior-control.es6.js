@@ -57,8 +57,6 @@
 
         // Methods to bind to/unbind from parent
         addInst(parent) {
-            console.log(parent)
-            console.log(this.elementInst)
             parent.elementInst.addControl(this.elementInst, this.position);
         },
 

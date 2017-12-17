@@ -13,15 +13,7 @@
      * @polymerBehavior QaMapGlBehavior.Element
      */
     QaMapGlBehavior.ElementImpl = {
-        properties: {
-            /**
-             * Turn debugging and console logs on or off
-             */
-            debug: {
-                type: Boolean,
-                value: false
-            }
-        },
+        properties: {},
         beforeRegister() {
             /**
              * A reference to this element's instance. The instance can be configured and
@@ -179,10 +171,6 @@
 
                 boundEvtEls.delete(evt);
             }
-        },
-
-        debugLog(message) {
-            if (this.debug === true) console.log(message);
         },
 
         /**
