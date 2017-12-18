@@ -129,10 +129,7 @@
             lastResults: {
                 type: Object,
                 readOnly: true,
-                notify: true,
-                value: function() {
-                    return null;
-                }
+                notify: true
             },
             /**
              * The result picked by the user from the suggestion
@@ -140,10 +137,7 @@
             selectedResult: {
                 type: Object,
                 readOnly: true,
-                notify: true,
-                value: function() {
-                    return null;
-                }
+                notify: true
             }
         },
 
