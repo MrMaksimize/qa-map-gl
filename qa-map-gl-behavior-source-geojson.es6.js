@@ -31,10 +31,18 @@
              */
             data: {
                 type: Object,
+                notify: true,
+                reflectToAttribute: true
+            },
+            dataUrl: {
+                type: String,
                 observer: "shouldUpdateInst",
                 notify: true
             }
         },
+
+        observers: ["shouldUpdateInstComplex(data.*)"],
+
 
         /**
          * Forces the GeoJSON layer to deeply check the `data` attribute for differences
@@ -57,6 +65,18 @@
                 Object.keys(this.data).length
             );
         },
+
+
+        shouldUpdateInstComplex(data) {
+            this.debounce(
+                "shouldUpdateInstDebounce",
+                function() {
+                    QaMapGlBehavior.ElementImpl.shouldUpdateInst.call(this, parent);
+                },
+                250
+            );
+        },
+
 
         // extends the layer `addInst` method to harvest and fire events
         addInst(parent) {
@@ -83,7 +103,7 @@
         },
 
         getInstOptions() {
-            var srcData = {
+            var defaultData = {
                 type: "FeatureCollection",
                 features: [{
                     type: "Feature",
@@ -96,7 +116,27 @@
                     }
                 }]
             };
-            if (this.data && this.data !== {}) srcData = this.data;
+
+            var srcData = {};
+
+            // Data overrides data url
+            // Data empty, data-url set
+            if ((!this.data || this.data === {}) && (this.dataUrl && this.dataUrl !== '')) {
+                srcData = this.dataUrl;
+            }
+            // Data-url empty, data is set
+            else if ((this.data && this.data !== {}) && (!this.dataUrl || this.dataUrl === '')) {
+                srcData = this.data;
+            }
+            // Both are set
+            else if ((this.data && this.data !== {}) && (this.dataUrl && this.dataUrl !== '')) {
+                throw "Both data and data-url are defined.  Don't know which to use";
+            }
+            // If both are missing, fall back to null island.
+            else {
+                srcData = defaultData;
+            }
+
 
             const options = QaMapGlBehavior.SourceImpl.getInstOptions.call(this);
             options.data = srcData;

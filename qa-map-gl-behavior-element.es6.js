@@ -182,7 +182,6 @@
          * @return {Boolean}
          */
         isShadyScoped() {
-            console.log(Polymer.settings)
             return !Polymer.Settings.useNativeShadow;
         },
 
